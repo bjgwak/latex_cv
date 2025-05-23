@@ -1,100 +1,95 @@
 \documentclass{muratcan_cv}
 
-\setname{Murat Can}{Karacabey}
-\setaddress{Munich/Germany}
-\setmobile{xx xxx xx xx}
-\setmail{muratcankaracabey@gmail.com}
-\setposition{Work Student} %ignored for now
-\setlinkedinaccount{https://www.linkedin.com/in/murat-can-karacabey-568a96b1/} %you can play with color of the template (red is also nice..)
-\setgithubaccount{https://github.com/muratcankaracabey} %you can play with color of the template (red is also nice..)
-\setthemecolor{red} %you can play with color of the template (red is also nice..)
+% Personal Information
+\setname{곽범진}{} % First name, Last name (optional, kept structure)
+\setmobile{}
+\setmail{d\_hana@naver.com}
+\setposition{Frontend Developer} % Your job title
+\setthemecolor{blue} % Theme color
+
+% Redefine contact to show only email and mobile, removing address, LinkedIn, GitHub
+\makeatletter
+\renewcommand{\contact}{%
+  {\small \@mail \cps \@mobile}%
+}
+\makeatother
 
 \begin{document}
-%Set variables
-%You can add sections, texts, explanations just by copying the style below. Replace the dummy texts "\lipsum[1][x-x]\par" with actual texts.
-%Create header
+
+% Create header
 \headerview
 \vspace{1ex}
-%Sections
-%
+
 % Summary
 \addblocktext{Summary}{%
-\lipsum[1][1-12]\ %replace this part with actual text
+React와 TypeScript를 기반으로 한 웹 프론트엔드 개발 경력 약 4.5년, 리눅스 어플리케이션 개발 경력 약 2.5년을 보유하고 있습니다. 특히 원격 화상회의 서비스인 '하이퍼미팅'의 개발부터 운영, 기능 고도화, 성능 최적화까지 전 과정을 주도적으로 경험하며 사용자 중심의 안정적인 서비스를 구축해왔습니다. 컴포넌트 설계, 상태 관리(MobX), 성능 최적화 등 다양한 영역에서 전문성을 갖췄으며, 고객사와 직접 소통하며 문제 해결과 기술 개선에 적극적으로 임해왔습니다. 목표는 최신 프론트엔드 기술 스택에 대한 깊이 있는 이해와 활용 능력을 키워, 장기적으로 기술 혁신을 통해 사용자 경험에 이바지하는 프론트엔드 전문가로 성장하는 것입니다.
 }
-%
-%Education
-\section{Education} 
-    \datedexperience{Boğaziçi University}{2013-2018} 
-    \explanation{B.S in Computer Engineering} 
-     \explanationdetail{\coloredbullet\ % 
-     \lipsum[1][3-4]\par %replace this part with actual text
-     }
-    \datedexperience{Technical University of Munich}{2019-2022} 
-    \explanation{M.S in Informatics} 
-    \explanationdetail{\coloredbullet\ %
-     \lipsum[1][3-4]\par %replace this part with actual text
-     }
-%
-% Experience
-\section{Experience}
-    %
-    \datedexperience{Intertech Inc.}{2014-Summer / Turkey} 
-    \explanation{Intern as android developer} 
-    %
-    \datedexperience{Velocity Inc.}{2015-Summer / Turkey} 
-    \explanation{Intern as Developer/Tester} 
-    %
-    \datedexperience{Akbank}{2018-2019 / Turkey} 
-    \explanation{Ios Developer} 
-    \explanationdetail{\coloredbullet\ %
-     \lipsum[1][1-2]\par %replace this part with actual text
-     }
-    %
-    \datedexperience{Mobile-Software AG}{2019-2020 / Germany} 
-    \explanation{Ios Developer} 
-    \explanationdetail{\coloredbullet\ %
-     \lipsum[1][4-5]\par %replace this part with actual text
-     }
-    %
-    \datedexperience{BMW Autonomous Driving Campus}{2020-Now / Germany} 
-    \explanation{Working Student} 
-    \explanationdetail{\coloredbullet\ %
-     \lipsum[1][3-4]\par %replace this part with actual text
-     }
-%
+
 % Skills
 \section{Skills}
-    %
-    \newcommand{\skillone}{\createskill{Programming Languages}{\textbf{\emph{Experienced:}} \ \  Python \cpshalf Swift \ \ \textbf{\emph{Familiar:}} \ \  Javascript \cpshalf Objective-C \cpshalf Bash \cpshalf Java \cpshalf Scheme}}
-    %
-    \newcommand{\skilltwo}{\createskill{Software Development}{Programming Paradigms \cpshalf GIT \cpshalf CLI \cpshalf Agile Methodology \cpshalf DevOps Lifecycles}}
-    %
-    \newcommand{\skillthree}{\createskill{Frameworks \ \& \ Libraries}{Jupyter \cpshalf Matplotplib \cpshalf Numpy \cpshalf Pandas \cpshalf Scikit-learn \cpshalf Gym \cpshalf PyTorch \cpshalf Tensorflow}}
-    %
-    \newcommand{\skillfour}{\createskill{iOS Programming}{RxSwift \cpshalf PromiseKit \cpshalf CocoaPods \cpshalf Autolayout/DSLs}}
-    %
-    \newcommand{\skillfive}{\createskill{Languages}{\textbf{\emph{Native:}} \ \  Turkish \ \ \textbf{\emph{Fluent:}} \ \ English \ \ \textbf{\emph{Beginner:}} \ \  German }}
-    %
-    \createskills{\skillone, \skilltwo, \skillthree, \skillfour, \skillfive}
-%
+    \newcommand{\skillone}{\createskill{FrontEnd}{TypeScript \cpshalf React \cpshalf MobX \cpshalf JavaScript \cpshalf WebRTC \cpshalf HTML/CSS}}
+    \newcommand{\skilltwo}{\createskill{DevOps}{Webpack \cpshalf Docker}}
+    \newcommand{\skillthree}{\createskill{Tools}{Git \cpshalf Storybook \cpshalf Figma \cpshalf Lighthouse}}
+    \createskills{\skillone, \skilltwo, \skillthree}
+ 
+ % Education
+\section{Education}
+    \datedexperience{한국과학기술원(KAIST)}{2016-2017}
+    \explanation{정보보호대학원 석사}
+    \explanationdetail{\coloredbullet\ 연구 분야: 공공 사물인터넷 환경에서의 신뢰 기반 적응형 접근 제어 (Trust-based access control) 시스템 연구\par
+     \coloredbullet\ 주요 성과: TrustCom (CORE A) 1저자 논문 2편 게재 및 1회 구두 발표, CCNC (CORE B) 3저자 논문 1편 게재
+     }
+    
+    \datedexperience{아주대학교}{2012-2015}
+    \explanation{소프트웨어융합학과 학사 (3.9/4.5)}
+    \explanationdetail{\coloredbullet\ 주요 활동: 컴퓨터 공학 전공 (알고리즘, 자료구조, 네트워크 등), 국내 학회 논문 게재, 스타트업 인턴, 경진대회 참가 및 수상 등
+     }
+    
 % Experience
-\section{Extra}
-    \newcommand{\extraone}{%
-    \lipsum[1][7-8]\par %replace this part with actual text
+\section{Experience}
+    \datedexperience{티맥스티베로}{2024.12-2025.02}
+    \explanation{Frontend Developer | 정부과제팀}
+    \explanationdetail{\coloredbullet\ 'IITP 음성 품질 향상 과제'의 웹 프론트엔드 개발 담당}
+    
+    \datedexperience{티맥스클라우드 / 티맥스오에스}{2020.08-2024.11}
+    \explanation{Frontend Developer | 하이퍼미팅 개발팀}
+    \explanationdetail{\coloredbullet\ '하이퍼미팅' 및 '온라인 강의 시스템' 프론트엔드 개발 주도}
+
+\datedexperience{티맥스에이앤씨}{2018.02-2020.07}
+    \explanation{Linux Developer | 어플리케이션 개발팀}
+    \explanationdetail{\coloredbullet\ TmaxOS용 '미디어 앱' 개발}
+
+% Projects
+\section{Projects}
+    \datedexperience{IITP 음성 품질 향상 과제}{2024.06-2025.02}
+    \explanation{AI 기반 실시간 음성 처리 모델의 화상회의 서비스 프론트엔드 적용}
+    \explanationdetail{\coloredbullet\ On-Device AI 구현: ONNX-Runtime-Web 라이브러리를 활용하여 On-Device AI 모델 로딩 및 클라이언트 사이드 추론 기능 개발\par
+    \coloredbullet\ 성능 최적화: 딜레이 최소화를 위해 Web Audio API 및 원형 큐 등을 활용한 멀티스레드 기반 실시간 음성 스트림 처리 구현\par
+    \coloredbullet\ 결과: 지속적인 성능 최적화를 통해 최종 음성 출력까지의 지연시간을 50\% 이상 단축하여 과제 요구치 달성
     }
-    %
-    \newcommand{\extratwo}{%
-    \lipsum[1][9-10]\par %replace this part with actual text
+    
+    \datedexperience{하이퍼미팅}{2020.08-2024.11}
+    \explanation{WebRTC 기반 웹 화상회의 서비스 프론트엔드 개발, 유지보수, 성능 개선}
+    \explanationdetail{\coloredbullet\ 코어 아키텍처 및 기본 기능 개발: Atomic Design, Container-Presenter, custom Hook 등 React 컴포넌트 설계 및 개발\par
+    \coloredbullet\ 상태 관리: MobX를 도입하여 복잡한 비동기 상태 및 UI 상태에 대해 중앙 집중식 관리 로직 구현\par
+    \coloredbullet\ 핵심 부가기능 초기 설계 및 개발: 회의 녹화, 화면 공유 등 주요 기능의 프론트엔드 로직 설계 및 프로토타입 개발\par
+    \coloredbullet\ 성능 테스트 자동화 환경 구축: Node.js 환경에서 다중의 자식 프로세스를 가상 클라이언트로 활용하는 시뮬레이션 환경 구축\par
+    \coloredbullet\ WebRTC 최적화: 클라이언트별 다수의 미디어 요청을 단일 커넥션으로 통합하도록 로직 리팩토링, Simulcast, ContentHint 등 WebRTC 표준 기술을 적용하여 다양한 네트워크 환경에서의 미디어 품질 최적화
     }
-    %
-    \newcommand{\extrathree}{%
-    \lipsum[1][11-12]%replace this part with actual text
+    
+    \datedexperience{온라인 강의 시스템}{2022.06-2024.05}
+    \explanation{하이퍼미팅 기반 실시간 강의 및 VOD 시청 환경 구축 (고객사: 인사혁신처)}
+    \explanationdetail{\coloredbullet\ 교육 시나리오 적용: 교육 시나리오 기반 Role(강사, 학생 등) 및 기능별 권한(Authorization) 시스템 설계/구현\par
+    \coloredbullet\ {교육 특화 기능 개발}: 서버 녹화, 학생 권한 제어, 발언권 관리 등 고객사 요구에 맞춘 교육 특화 기능 및 관련 UI/UX 개발\par
+    \coloredbullet\ 웹 보안성 강화: OWASP ZAP Report 활용 정기적 취약점 점검, 적절한 CSP(Content Security Policy) 적용, JWT 기반 인증 및 라이브러리 관리 등을 통한 프론트엔드 보안 취약점 해결\par
+    \coloredbullet\ VOD 모드 개발: HLS.js 라이브러리를 활용하여 HLS 기반 스트리밍 기능 개발
     }
-    %
-    \newcommand{\listofextras}{\extraone, \extratwo, \extrathree}
-    %
-    \createbullets{\listofextras}
-%
-%Footnote
-\createfootnote
+    
+    \datedexperience{TmaxOS 미디어 앱}{2018.02-2020.07}
+    \explanation{Linux 기반 TmaxOS 미디어 애플리케이션 개발 (C++, FFmpeg)}
+    \explanationdetail{\coloredbullet\ Linux 환경에서 C++ 및 FFmpeg 라이브러리를 활용한 GUI 비디오 플레이어 및 시스템 제어판 개발\par
+    \coloredbullet\ 다양한 미디어 포맷 처리, MVC에서 MVVM으로의 디자인 패턴 적용 및 코드 구조 개선 경험\par
+    \coloredbullet\ 이러한 시스템 수준의 개발 경험은 복잡한 웹 애플리케이션의 아키텍처 설계 및 문제 해결 능력의 기반이 됨
+    }
+
 \end{document}
