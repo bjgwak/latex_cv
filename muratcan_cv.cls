@@ -1,12 +1,13 @@
 % Created by Murat Can Karacabey
-% this is inspired by Michael Pollind's Awesome CV 
+% this is inspired by Michael Pollind's Awesome CV
 % Created from scratch as a much simpler alternative to it to actually learn LaTeX.
 % Might be interpreted as an easier-to-edit or easier-to-understand-what-is-going-on version of it.
+% MODIFIED FOR LAYOUT IMPROVEMENTS (3rd iteration)
 \author{Murat Can Karacabey}
-\RequirePackage[dvipsnames]{xcolor} % moved here I guess article class causes option clash with xcolor if used after loading the class
-\LoadClass[11pt]{article}
+\RequirePackage[dvipsnames]{xcolor}
+\LoadClass[11pt]{article} % Base font size is 11pt
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{muratcan_cv}[2020/04/15 Muratcan CV Class]
+\ProvidesClass{muratcan_cv}[2020/04/15 Muratcan CV Class (Layout Modified v3)]
 
 \usepackage{fontspec}
 \usepackage{xeCJK}
@@ -15,25 +16,17 @@ CJKspace=true,%
 CJKecglue={}%
 }
 
-% 한글 폰트 설정 (Noto Sans CJK KR)
-% Regular, Bold, Light 등 다양한 굵기를 지정할 수 있습니다.
-% 폰트 이름은 시스템 또는 TeX Live 배포판에 따라 약간의 차이가 있을 수 있습니다.
-% (예: "Noto Sans KR" 또는 "Noto Sans CJK KR Regular")
 \setCJKmainfont{Noto Sans CJK KR}%
-[Ligatures=TeX,BoldFont={*-Bold},AutoFakeSlant]
-% \setCJKsansfont{Noto Sans CJK KR} % 한글 산세리프 폰트 (이미 \setCJKmainfont으로 지정했다면 생략 가능)
-\setCJKmonofont{Noto Sans Mono CJK KR} % 한글 고정폭 폰트
+[Ligatures=TeX,BoldFont={*-Bold},AutoFakeSlant] % Ensure your Noto Sans CJK KR supports bold small caps or fakes it well
+\setCJKmonofont{Noto Sans Mono CJK KR}
 
-% 영문 폰트도 함께 설정할 수 있습니다.
-\setmainfont{Noto Sans CJK KR} % 예시: 영문 기본 폰트
-% \setsansfont{Arial} % 예시: 영문 산세리프 폰트
+\setmainfont{Noto Sans CJK KR}
 
 \RequirePackage{etoolbox}
 \RequirePackage{pgffor}
 \RequirePackage{titlesec}
 \RequirePackage{tikz}
-\RequirePackage{fontspec}
-\RequirePackage[left=0.75in,top=0.3in,right=0.75in,bottom=0.6in]{geometry} % Document margins
+\RequirePackage[left=0.75in,top=0.3in,right=0.75in,bottom=0.6in]{geometry}
 \RequirePackage{hyperref}
 \RequirePackage{fontawesome}
 \RequirePackage{mfirstuc}
@@ -41,11 +34,9 @@ CJKecglue={}%
 \RequirePackage{lipsum}
 \RequirePackage{array}
 
-
 \pagestyle{empty}
 
 %Setup
-
 \newcommand*{\setname}[2]{\def\@firstname{#1}\def\@lastname{#2}}
 \newcommand*{\setaddress}[1]{\def\@address{#1}}
 \newcommand*{\setmobile}[1]{\def\@mobile{#1}}
@@ -55,50 +46,46 @@ CJKecglue={}%
 \newcommand*{\setlinkedinaccount}[1]{\def\@linkedinaccount{#1}}
 \newcommand*{\setgithubaccount}[1]{\def\@githubaccount{#1}}
 
-%Setup for coverletter
-
 \newcommand*{\setcompanyname}[1]{\def\@companyname{#1}}
 \newcommand*{\setcontactperson}[1]{\def\@contactperson{#1}}
 \newcommand*{\setclaimedposition}[1]{\def\@claimedposition{#1}}
-
 
 \hypersetup{
     colorlinks=true,
     urlcolor=cyan,
 }
 
-% View commands
 % Header
-
-% can makebox also be used?
 \newcommand\headerview{
-
 \begin{minipage}{0.45\linewidth}
-    \center \name \\[0.05cm] 
-    \contact % address \ mobile \\ mail
+    \center \name \\[0.05cm]
+    \contact
 \end{minipage}
 \hfill
 \begin{minipage}{0.25\linewidth}
-     \includegraphics[width=0.66\linewidth]{images/me}
-\end{minipage}% 
+    \IfFileExists{images/me.png}{%
+        \includegraphics[width=0.66\linewidth]{images/me.png}%
+    }{%
+        \IfFileExists{images/me.jpg}{%
+            \includegraphics[width=0.66\linewidth]{images/me.jpg}%
+        }{%
+            \textcolor{red}{Image not found: images/me}%
+        }%
+    }%
+\end{minipage}%
 }
-
-%profilpicture
 
 \newsavebox{\picbox}
 \newcommand{\profpic}[2]{%
     \savebox{\picbox}{%
-    \includegraphics[scale=#1]{#2}}% 
+    \includegraphics[scale=#1]{#2}}%
     \tikz\node [draw, circle,%
-    line width=4pt, color=white,% 
+    line width=4pt, color=white,%
     minimum width=\wd\picbox,minimum height=\ht\picbox,%
-    path picture={ \node at (path picture bounding box.center)% 
-    {\usebox{\picbox}};}]% 
+    path picture={ \node at (path picture bounding box.center)%
+    {\usebox{\picbox}};}]%
     {};}
-    
-%contactsubviews 
-    
-    
+
 \newcommand{\githubview}{\href{\@linkedinaccount}{\faLinkedinSquare\ \footnotesize linkedin}}
 \newcommand{\linkedinview}{\href{\@githubaccount}{\faGithubSquare\ \footnotesize github}}
 
@@ -106,88 +93,87 @@ CJKecglue={}%
     {\large \@firstname \ \textsc{\@lastname}}
 }
 
-\newcommand{\contact}{%
+\newcommand{\contact}{% % User redefines this in cv.tex
         {\small \@address  \cps \@mobile \\ \@mail%
         \\%
-        \linkedinview \cps \githubview \\ 
-        } % 
+        \linkedinview \cps \githubview \\
+        } %
 }
 
-% Covverletterview
-
-\newcommand\coverletter[1]{ 
-\\  \coverlettersubview 
-\section{} \vspace{1ex} 
+\newcommand\coverletter[1]{
+\\  \coverlettersubview
+\section{} \vspace{1ex}
 \textbf{ Dear \@contactperson, \\[0.1cm]}
   #1
 }
 
 \newcommand\coverlettersubview{
-\begin{tabular}{>{\scshape \bfseries \color{\@themecolor}}l  >{\small }l}
+\begin{tabular}{>{\scshape \bfseries \color{\@themecolor}}l  >{\small }l}
 Company: & \@companyname \\
 Position: & \@claimedposition \\
 \end{tabular}
 }
 
-
 % Helper commands
-
-\newcommand\ruleafter[1]{#1~{\color{black!60!\@themecolor}\hrulefill}} % a trick to put the line with <before> parameter in \titleformat
-
-%colorfulpipeseperator
-
+\newcommand\ruleafter[1]{#1~{\color{black!60!\@themecolor}\hrulefill}}
 \newcommand{\cps}{{\color{\@themecolor} \quad\textbar\quad}}
 \newcommand{\cpshalf}{{\color{\@themecolor} \hspace{0.2em}\textbar\hspace{0.2em}}}
-
 \newcommand{\coloredbullet}{{\color{\@themecolor} \textbullet}}
 
 % Edit section styles
-
-\titleformat{\section}      % Customise the \section command 
-  {\large\bfseries\scshape\raggedright\color{\@themecolor}} % Make the \section headers large (\Large),
-                               % small capitals (\scshape) and left aligned (\raggedright)
-  {}{0em}                      % Can be used to give a prefix to all sections, like 'Section ...'
-  {\ruleafter}                           % Can be used to insert code before the heading
-
-\titlespacing*{\section}{-1pt}{0pt}{0pt}
+\titleformat{\section}
+  {\Large\bfseries\scshape\raggedright\color{\@themecolor}} % Section title font: Large, Bold, SmallCaps, Color
+  {}{0em}
+  {\ruleafter}
+\titlespacing*{\section}{0pt}{2.0ex plus 0.2ex minus .2ex}{1.0ex plus 0.2ex minus .2ex}
 
 % Textview commands
-
 \newcommand{\experience}[2]{%
   \mbox { \hspace{1em} \scshape #1 }%
 }
 
 \newcommand{\datetext}[1]{%
-{\itshape  \footnotesize \mdseries  \color{black!60!\@themecolor} #1 } 
+{\itshape  \footnotesize \mdseries  \color{black!60!\@themecolor} #1 }
 }
+
+\newlength{\explanationbreakskip}
+\setlength{\explanationbreakskip}{4pt}
 
 \newcommand{\datedexperience}[2]{%
     \noindent%
-    {\normalsize% % 이 블록에 \normalsize 적용하여 #1과 \hspace의 em 단위에 영향
-    \mbox{\hspace{1em}\scshape#1}% % \hspace{1em}이 \normalsize 기준 em을 사용하도록 함
+    {\normalsize%
+    % MODIFIED: Added \bfseries to make the dated experience title bold
+    \mbox{\hspace{1em}\bfseries\scshape#1}%
     }%
-    \hfill \datetext{#2}\\[0.01cm]%
+    \hfill \datetext{#2}\\[\explanationbreakskip]%
 }
 
 \newcommand{\explanation}[1]{%
-    \mbox { \scshape \hspace{1.7em} \footnotesize #1}\\[-4pt]% % 기존 -2pt에서 -4pt로 변경하여 간격 축소
+    \mbox { \scshape \hspace{1.7em} \footnotesize #1}\\[0pt]%
 }
 
 \newcommand{\explanationdetail}[1]{%
     \hspace*{2.5em}%
     \begin{minipage}[t]{\dimexpr\linewidth-2.5em\relax}%
-        \setlength{\parskip}{2pt}% % minipage 내의 단락(항목) 간격을 2pt로 설정
+        \setlength{\parskip}{3pt}%
         \footnotesize #1%
-    \end{minipage}\\[5pt]% % explanationdetail 블록 전체 다음의 간격은 5pt 유지
+    % MODIFIED: Increased vertical space after explanationdetail block to 2.5ex from 1.5ex
+    \end{minipage}\\[2.5ex]%
 }
 
 \newcommand{\itemwithtext}[1]{%
     \begin{minipage}{\linewidth} \footnotesize \item #1 \end{minipage}
 }
 
-\newcommand{\addblocktext}[2]{%
-  \section{#1} 
-  \indent \explanationdetail{\hspace{4ex} #2}
+\newcommand{\addblocktext}[2]{% Summary block
+  \section{#1}
+  \vspace{0.5ex}
+  \noindent
+  \begin{minipage}{\linewidth}
+      \setlength{\parskip}{0.5\baselineskip}%
+      \small #2 % Summary text font: small
+  \end{minipage}
+  \vspace{2ex}
 }
 
 \newcommand\createskill[2]{%
@@ -201,17 +187,18 @@ Position: & \@claimedposition \\
 \newcommand\createskillsanothertry[1]{%not used
   \begin{tabular}{r|l}
       \createtablecontent{#1}
-        \end{tabular}
-}
-
-\newcommand\createskills[1]{%
-\explanationdetail{
-  \begin{tabular}{rl}
-    \makeatletter
-    \@for\thisitem:=#1\do{\thisitem\\[0.1cm]}
-    \makeatother
     \end{tabular}
 }
+
+\newcommand\createskills[1]{% Skills table
+  \vspace{0.5ex}
+  \noindent
+  \begin{tabular}{@{}r@{ \hspace{1.5em}}l@{}}
+    \makeatletter
+    \@for\thisitem:=#1\do{\thisitem\\[0.5ex]}
+    \makeatother
+  \end{tabular}
+  \vspace{2ex}
 }
 
 \newcommand\createbullets[1]{%
@@ -227,5 +214,3 @@ Position: & \@claimedposition \\
   \renewcommand{\footnotesize}{\fontsize{7pt}{11pt}\selectfont}
     \renewcommand\footnoterule{\rule{0.3\linewidth}{0.5pt}}
     \let\thefootnote\relax\footnote{\today\ / \href{https://github.com/muratcankaracabey/latex_cv}{source code}}}
-
-
