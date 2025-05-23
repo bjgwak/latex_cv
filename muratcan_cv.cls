@@ -2,12 +2,12 @@
 % this is inspired by Michael Pollind's Awesome CV
 % Created from scratch as a much simpler alternative to it to actually learn LaTeX.
 % Might be interpreted as an easier-to-edit or easier-to-understand-what-is-going-on version of it.
-% MODIFIED FOR LAYOUT IMPROVEMENTS (3rd iteration)
+% MODIFIED FOR LAYOUT IMPROVEMENTS (4th iteration - Summary readability)
 \author{Murat Can Karacabey}
 \RequirePackage[dvipsnames]{xcolor}
 \LoadClass[11pt]{article} % Base font size is 11pt
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{muratcan_cv}[2020/04/15 Muratcan CV Class (Layout Modified v3)]
+\ProvidesClass{muratcan_cv}[2020/04/15 Muratcan CV Class (Layout Modified v4)]
 
 \usepackage{fontspec}
 \usepackage{xeCJK}
@@ -17,7 +17,7 @@ CJKecglue={}%
 }
 
 \setCJKmainfont{Noto Sans CJK KR}%
-[Ligatures=TeX,BoldFont={*-Bold},AutoFakeSlant] % Ensure your Noto Sans CJK KR supports bold small caps or fakes it well
+[Ligatures=TeX,BoldFont={*-Bold},AutoFakeSlant]
 \setCJKmonofont{Noto Sans Mono CJK KR}
 
 \setmainfont{Noto Sans CJK KR}
@@ -33,6 +33,7 @@ CJKecglue={}%
 \RequirePackage{ifthen}
 \RequirePackage{lipsum}
 \RequirePackage{array}
+\RequirePackage{setspace} % MODIFIED: Added for \setstretch
 
 \pagestyle{empty}
 
@@ -142,14 +143,13 @@ Position: & \@claimedposition \\
 \newcommand{\datedexperience}[2]{%
     \noindent%
     {\normalsize%
-    % MODIFIED: Added \bfseries to make the dated experience title bold
     \mbox{\hspace{1em}\bfseries\scshape#1}%
     }%
     \hfill \datetext{#2}\\[\explanationbreakskip]%
 }
 
 \newcommand{\explanation}[1]{%
-    \mbox { \scshape \hspace{1.7em} \footnotesize #1}\\[0pt]%
+    \mbox { \scshape \hspace{1.7em} \footnotesize #1}\\[\explanationbreakskip]%
 }
 
 \newcommand{\explanationdetail}[1]{%
@@ -157,7 +157,6 @@ Position: & \@claimedposition \\
     \begin{minipage}[t]{\dimexpr\linewidth-2.5em\relax}%
         \setlength{\parskip}{3pt}%
         \footnotesize #1%
-    % MODIFIED: Increased vertical space after explanationdetail block to 2.5ex from 1.5ex
     \end{minipage}\\[2.5ex]%
 }
 
@@ -165,15 +164,17 @@ Position: & \@claimedposition \\
     \begin{minipage}{\linewidth} \footnotesize \item #1 \end{minipage}
 }
 
+% MODIFIED: \addblocktext for Summary readability
 \newcommand{\addblocktext}[2]{% Summary block
   \section{#1}
-  \vspace{0.5ex}
-  \noindent
+  \vspace{0.5ex} % Space after section title rule
+  \noindent % No indentation for the summary block
   \begin{minipage}{\linewidth}
-      \setlength{\parskip}{0.5\baselineskip}%
+      \setstretch{1.2} % MODIFIED: Increase line spacing by 20% for readability
+      \setlength{\parskip}{0.6\baselineskip} % MODIFIED: Adjust paragraph spacing (if sentences are separate paragraphs)
       \small #2 % Summary text font: small
   \end{minipage}
-  \vspace{2ex}
+  \vspace{2ex} % More space after the summary block before the next section
 }
 
 \newcommand\createskill[2]{%
