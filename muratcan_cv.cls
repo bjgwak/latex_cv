@@ -7,7 +7,27 @@
 \LoadClass[11pt]{article}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{muratcan_cv}[2020/04/15 Muratcan CV Class]
-\RequirePackage[sfdefault]{noto}
+
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\xeCJKsetup{%
+CJKspace=true,%
+CJKecglue={}%
+}
+
+% 한글 폰트 설정 (Noto Sans CJK KR)
+% Regular, Bold, Light 등 다양한 굵기를 지정할 수 있습니다.
+% 폰트 이름은 시스템 또는 TeX Live 배포판에 따라 약간의 차이가 있을 수 있습니다.
+% (예: "Noto Sans KR" 또는 "Noto Sans CJK KR Regular")
+\setCJKmainfont{Noto Sans CJK KR}%
+[Ligatures=TeX,BoldFont={*-Bold},AutoFakeSlant]
+% \setCJKsansfont{Noto Sans CJK KR} % 한글 산세리프 폰트 (이미 \setCJKmainfont으로 지정했다면 생략 가능)
+\setCJKmonofont{Noto Sans Mono CJK KR} % 한글 고정폭 폰트
+
+% 영문 폰트도 함께 설정할 수 있습니다.
+\setmainfont{Noto Sans CJK KR} % 예시: 영문 기본 폰트
+% \setsansfont{Arial} % 예시: 영문 산세리프 폰트
+
 \RequirePackage{etoolbox}
 \RequirePackage{pgffor}
 \RequirePackage{titlesec}
@@ -20,6 +40,8 @@
 \RequirePackage{ifthen}
 \RequirePackage{lipsum}
 \RequirePackage{array}
+
+
 \pagestyle{empty}
 
 %Setup
@@ -50,14 +72,15 @@
 
 % can makebox also be used?
 \newcommand\headerview{
-\begin{minipage}{0.25\linewidth}
-    \profpic{0.22}{images/profilepicture}
-\end{minipage}% 
-\hfill
+
 \begin{minipage}{0.45\linewidth}
     \center \name \\[0.05cm] 
     \contact % address \ mobile \\ mail
 \end{minipage}
+\hfill
+\begin{minipage}{0.25\linewidth}
+     \includegraphics[width=0.66\linewidth]{images/me}
+\end{minipage}% 
 }
 
 %profilpicture
@@ -131,7 +154,7 @@ Position: & \@claimedposition \\
 % Textview commands
 
 \newcommand{\experience}[2]{%
-  \mbox { \hspace{1em} \scshape \textbf{#1} }%
+  \mbox { \hspace{1em} \scshape #1 }%
 }
 
 \newcommand{\datetext}[1]{%
@@ -139,15 +162,23 @@ Position: & \@claimedposition \\
 }
 
 \newcommand{\datedexperience}[2]{%
-  \begin{small} \mbox { \hspace{1em} \scshape \textbf{#1} } \end{small} \hfill \datetext{#2}\\[0.01cm] %
+    \noindent%
+    {\normalsize% % 이 블록에 \normalsize 적용하여 #1과 \hspace의 em 단위에 영향
+    \mbox{\hspace{1em}\scshape#1}% % \hspace{1em}이 \normalsize 기준 em을 사용하도록 함
+    }%
+    \hfill \datetext{#2}\\[0.01cm]%
 }
 
 \newcommand{\explanation}[1]{%
-    \mbox { \scshape \hspace{1.2em} \footnotesize #1}\\[0.05cm]
+    \mbox { \scshape \hspace{1.7em} \footnotesize #1}\\[-4pt]% % 기존 -2pt에서 -4pt로 변경하여 간격 축소
 }
 
 \newcommand{\explanationdetail}[1]{%
-    \indent \begin{minipage}{0.96\linewidth} \footnotesize #1 \end{minipage} \\[0.1cm]
+    \hspace*{2.5em}%
+    \begin{minipage}[t]{\dimexpr\linewidth-2.5em\relax}%
+        \setlength{\parskip}{2pt}% % minipage 내의 단락(항목) 간격을 2pt로 설정
+        \footnotesize #1%
+    \end{minipage}\\[5pt]% % explanationdetail 블록 전체 다음의 간격은 5pt 유지
 }
 
 \newcommand{\itemwithtext}[1]{%
